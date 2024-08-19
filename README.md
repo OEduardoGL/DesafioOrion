@@ -1,3 +1,3 @@
 # DesafioOrion
 
-![Captura de tela de 2024-08-19 10-05-42](https://github.com/user-attachments/assets/0b4374df-e8fe-4f46-aa96-1145241c54ed)
+![orion](https://github.com/user-attachments/assets/47713d47-3bb9-499b-9b4f-a2f876753fd2)
