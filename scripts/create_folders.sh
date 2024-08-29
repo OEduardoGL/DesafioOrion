@@ -11,3 +11,5 @@ hdfs dfs -mkdir -p /datalake/staging/html
 hdfs dfs -mkdir -p /datalake/staging/json
 hdfs dfs -mkdir -p /datalake/clean
 
+# Mantenha o container ativo
+tail -f /dev/null

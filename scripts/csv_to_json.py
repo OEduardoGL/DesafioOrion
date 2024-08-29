@@ -1,28 +1,15 @@
-import csv
-import json
-import os
+from pyspark.sql import SparkSession
 
+spark = SparkSession.builder \
+    .appName("CSV to JSON Conversion") \
+    .getOrCreate()
 
-def to_json(source_file):
-    target_folder = "."
+csv_path = 'hdfs://namenode:8020/datalake/staging/csv/data'
 
-    data = {}
+target_folder = 'hdfs://namenode:8020/datalake/clean/csv'
 
-    with open(source_file, 'r', encoding= "utf-8") as csvfile:
-        csvRead = csv.DictReader(csvfile)
-        k = 0
+df = spark.read.option('header', 'true').csv(csv_path)
 
-        for rows in csvRead:
-            data[k] = rows
-            k = k+1
+df.write.save(path=target_folder, format='json')
 
-    file_ = os.path.basename(source_file) + "_converted.json"
-
-    with open(target_folder+file_, 'w', encoding='utf-8') as jsonf:
-            jsonf.write(json.dumps(data, indent=4))
-
-def main(arg, *args):
-    to_csv(arg)
-
-if '__name__' == '__main__':
-    sys.exit(main())
+spark.stop()
