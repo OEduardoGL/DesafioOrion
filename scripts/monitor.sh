@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Função para mover arquivos com base no formato
 move_files() {
   local src_path=$1
   local rel_path=$2
@@ -18,8 +17,8 @@ move_files() {
     return
   fi
   
-  hdfs dfs -mkdir -p $target_dir  # Cria o diretório de destino se não existir
-  hdfs dfs -mv $src_path $target_dir/  # Move o arquivo para o diretório de destino
+  hdfs dfs -mkdir -p $target_dir 
+  hdfs dfs -mv $src_path $target_dir/  
 }
 
 process_directory() {

@@ -4,12 +4,9 @@ spark = SparkSession.builder \
     .appName("CSV to JSON Conversion") \
     .getOrCreate()
 
-csv_path = 'hdfs://namenode:8020/datalake/staging/csv/data'
+csv_path = 'hdfs://namenode:8020/datalake/staging/csv/'
+target_folder = 'hdfs://namenode:8020/datalake/clean'
 
-target_folder = 'hdfs://namenode:8020/datalake/clean/csv'
-
-df = spark.read.option('header', 'true').csv(csv_path)
-
-df.write.save(path=target_folder, format='json')
-
+sparkdf = spark.read.option('header', 'true').option('delimiter', ';').csv(csv_path)
+sparkdf.write.save(path=target_folder, format='json', mode="append")
 spark.stop()
